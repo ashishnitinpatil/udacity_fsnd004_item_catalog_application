@@ -1,0 +1,11 @@
+{%- if current_user.is_authenticated -%}
+  <div>
+    Hello {{ current_user.name }}!</p>
+    <img src="{{ current_user.avatar }}?sz=50" width="50" height="50" alt="{{ current_user.name }}">
+    <a href="{{ url_for('users.logout') }}">Logout</a>
+  </div>
+{%- else -%}
+  <div>
+    <a href="{{ url_for('users.login') }}">Login</a>
+  </div>
+{%- endif -%}
