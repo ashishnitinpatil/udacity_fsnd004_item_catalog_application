@@ -7,10 +7,14 @@ Requirements
 ------------
 Python v3.x (tested with 3.6 only) is required  
 - Setup a virtualenv
+    ```bash
     virtualenv -p python3.6 .venv
     .venv/Scripts/activate.bat
+    ```
 - install requirements
+    ```bash
     pip install -r requirements.txt
+    ```
 
 Project brief
 -------------
@@ -21,19 +25,29 @@ Project brief
 Usage
 -----
 - Activate virtualenv
+    ```bash
     .venv\Scripts\activate.bat
     # For linux, execute ".venv/bin/activate" instead
+    ```
 - Set environment variables for flask
+    ```bash
     # For linux, use export instead of set (& you may skip the quotes)
     set "PythonPath=%PythonPath%;E:\Study\Full_Stack_Nano_Degree\projects\4_item_catalog_application"
     set "FLASK_APP=E:\Study\Full_Stack_Nano_Degree\projects\4_item_catalog_application\server.py"
     set "FLASK_DEBUG=1"
+    ```
 - Initialize db
+    ```bash
     flask shell
-        from item_catalog_app.models import db
-        db.create_all()
+    ```
+    ```python
+    >>> from item_catalog_app.models import db
+    >>> db.create_all()
+    ```
 - Run server
+    ```bash
     flask run
+    ```
 
 Licensing
 ---------
