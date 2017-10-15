@@ -27,6 +27,7 @@ class User(UserMixin, db.Model):
 
 login_manager = LoginManager()
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -43,10 +44,10 @@ class Category(db.Model):
                            onupdate=datetime.utcnow)
 
     def __repr__(self):
-       return "<Category(name='%s')>" % self.name
+        return "<Category(name='%s')>" % self.name
 
     def __str__(self):
-       return self.name
+        return self.name
 
     def serialize(self, include_items=True):
         serialized_category = {
@@ -73,10 +74,10 @@ class Item(db.Model):
                            onupdate=datetime.utcnow)
 
     def __repr__(self):
-       return "<Item(name='%s', category='%s')>" % (self.name, self.category)
+        return "<Item(name='%s', category='%s')>" % (self.name, self.category)
 
     def __str__(self):
-       return self.name
+        return self.name
 
     def serialize(self, include_category=False):
         serialized_item = {

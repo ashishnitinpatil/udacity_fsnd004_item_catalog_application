@@ -24,7 +24,7 @@ def index():
     return render_template('index.html', **locals())
 
 
-## Category routes
+# Category routes
 @routes.route('/category/new/', methods=['GET', 'POST'])
 @login_required
 def new_category():
@@ -74,7 +74,7 @@ def category_json(category_id):
     return jsonify(category.serialize())
 
 
-## Item routes
+# Item routes
 @routes.route('/item/new/', methods=['GET', 'POST'])
 @routes.route('/item/new/<int:category_id>/', methods=['GET', 'POST'])
 @login_required
@@ -136,7 +136,7 @@ def delete_object(Model, object_id):
         return render_template('delete.html', object=object)
 
 
-## Deletion routes
+# Deletion routes
 @routes.route('/category/<int:category_id>/delete/', methods=['GET', 'POST'])
 @login_required
 def delete_category(category_id):

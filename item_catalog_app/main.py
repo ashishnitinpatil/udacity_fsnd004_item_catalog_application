@@ -8,7 +8,7 @@ from item_catalog_app.views.catalog import routes as catalog_routes
 
 
 def create_app():
-# instantiate app and load settings
+    # instantiate app and load settings
     app = Flask(__name__)
     app.config.from_object(Config)
     initialize_apps(app)
