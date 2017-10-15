@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="card col-md-5">
+          <div class="card-body text-center">
+            <h4 class="card-title text-primary">Delete {{ object.__class__.__name__ }}</h4>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label>Really delete {{ object.__class__.__name__ }} {{ object.name }}?</label>
+                    {%- if object.__class__.__name__ == 'Category' and object.items -%}
+                        <label>
+                            Note that this would also delete all items under it, viz.
+                            {%- for item in object.items -%}, {{ item.name }}{%- endfor -%}.
+                        </label>
+                    {%- endif -%}
+                </div>
+                <button type="submit" class="btn btn-primary" id="submit">Yes</button>
+                <a href="{{ url_for('catalog.index') }}" class="btn btn-secondary">No</a>
+            </form>
+          </div>
+        </div>
+    </div>
+{% endblock %}

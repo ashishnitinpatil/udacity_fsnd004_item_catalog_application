@@ -19,8 +19,9 @@ Python v3.x (tested with 3.6 only) is required
 Project brief
 -------------
 - The application uses Google Login instead of implementing own authentication
-- Once logged in, a user can perform CRUD operations on his catalog items
-- Application provides a JSON API endpoint for all these operations
+- Once logged in, a user can perform CRUD operations on any of the catalog items
+- Application provides a JSON API endpoint for the READ operations
+- Site is read-only for anonymous / non-logged-in users
 
 Usage
 -----

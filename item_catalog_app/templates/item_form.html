@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="card text-center col-md-5">
+          <div class="card-body">
+            <h4 class="card-title text-primary">{% if item %}Edit{% else %}New{% endif %} Item</h4>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Category</label>
+                    <select class="form-control" name="category" required {% if not category_id %}autofocus{% endif %}>
+                        <option {% if not item %}selected{% endif %} disabled>Select a category</option>
+                        {% for category in categories %}
+                        <option value="{{ category.id }}" {% if (item and item.category==category) or category_id==category.id %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type ="text" class="form-control" maxlength="32" name="name" placeholder="Item name" required {% if item %}value="{{ item.name }}"{% endif %} {% if category_id %}autofocus{% endif %}>
+                </div>
+                <div class="form-group">
+                    <label for="name">Description</label>
+                    <textarea class="form-control" maxlength="256" name="description" placeholder="Item description" required>{% if item %}{{ item.description }}{% endif %}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+#profile-dropdown {
+  color: inherit;
+}
+.avatar {
+  vertical-align: top;
+}
+button {
+    cursor: pointer;
+}
+i.material-icons {
+    vertical-align: text-bottom;
+}
+.btn-xs {
+    padding: 0.15rem 0.25rem;
+    font-size: 0.575rem;
+    line-height: 1;
+    border-radius: 0.2rem;
+}

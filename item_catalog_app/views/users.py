@@ -29,16 +29,10 @@ def get_google_auth(state=None, token=None):
         )
 
 
-@routes.route('/')
-@login_required
-def index():
-    return render_template('index.html')
-
-
 @routes.route('/login')
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('catalog.index'))
     google = get_google_auth()
     auth_url, state = google.authorization_url(
         settings.Config.AUTH_URI, access_type='offline')
@@ -49,13 +43,13 @@ def login():
 @routes.route('/oauth2callback')
 def callback():
     if current_user is not None and current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('catalog.index'))
     if 'error' in request.args:
         if request.args.get('error') == 'access_denied':
             return 'You denied access.'
         return 'Error encountered.'
     if 'code' not in request.args and 'state' not in request.args:
-        return redirect(url_for('login'))
+        return redirect(url_for('users.login'))
     else:
         google = get_google_auth(state=session.get('oauth_state', None))
         try:
@@ -81,7 +75,7 @@ def callback():
             models.db.session.add(user)
             models.db.session.commit()
             login_user(user)
-            return redirect(url_for('users.index'))
+            return redirect(url_for('catalog.index'))
         return 'Could not fetch your information.'
 
 
@@ -89,4 +83,4 @@ def callback():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('users.index'))
+    return redirect(url_for('catalog.index'))
