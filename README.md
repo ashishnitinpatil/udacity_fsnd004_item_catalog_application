@@ -45,6 +45,9 @@ Usage
     >>> from item_catalog_app.models import db
     >>> db.create_all()
     ```
+- Secrets
+    - Create your own secrets.json, refer to [sample_secrets.json](/sample_secrets.json) for example
+    - Change the [CLIENT_ID](/item_catalog_app/settings.py#L26) setting with your own Google cient ID
 - Run server
     ```bash
     flask run
