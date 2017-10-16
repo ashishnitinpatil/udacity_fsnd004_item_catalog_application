@@ -23,7 +23,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = secrets['SQLALCHEMY_DATABASE_URI']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # Google Auth related
-    CLIENT_ID = '158639267879-1k5j5uhbk32cgv7cc26412kasd79qo3i.apps.googleusercontent.com'
+    CLIENT_ID = secrets['GOOGLE_CLIENT_ID'] or 'googleusercontent.com'
     CLIENT_SECRET = secrets['GOOGLE_CLIENT_SECRET'] or 'top-secret'
     REDIRECT_URI = 'http://127.0.0.1:5000/oauth2callback'
     AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'

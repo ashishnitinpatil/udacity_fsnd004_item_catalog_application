@@ -5,7 +5,7 @@ This is part of the project submission under the Full Stack Nano Degree program 
 
 Requirements
 ------------
-Python v3.x (tested with 3.6 only) is required  
+Python v3.x (tested with 3.6 only) is required
 - Setup a virtualenv
     ```bash
     virtualenv -p python3.6 .venv
@@ -45,9 +45,7 @@ Usage
     >>> from item_catalog_app.models import db
     >>> db.create_all()
     ```
-- Secrets
-    - Create your own secrets.json, refer to [sample_secrets.json](/sample_secrets.json) for example
-    - Change the [CLIENT_ID](/item_catalog_app/settings.py#L26) setting with your own Google cient ID
+- Create your own secrets.json, refer to [sample_secrets.json](/sample_secrets.json) for example
 - Run server
     ```bash
     flask run
