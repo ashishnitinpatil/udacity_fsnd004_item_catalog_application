@@ -47,6 +47,10 @@ class Category(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
+
+    created_by_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_by = db.relationship(User, lazy=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow)
@@ -66,6 +70,9 @@ class Category(db.Model):
             serialized_category['items'] = [i.serialize() for i in self.items]
         return serialized_category
 
+    def has_perm(self, user, perm_type='read'):
+        return self.created_by == user if perm_type != 'read' else True
+
 
 class Item(db.Model):
     """Model for items in the catalog"""
@@ -74,9 +81,14 @@ class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(32), nullable=False)
     description = db.Column(db.String(256))
+
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     category = db.relationship(Category, lazy=False,
                                backref=backref('items', cascade="all,delete"))
+
+    created_by_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_by = db.relationship(User, lazy=False)
+
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow,
                            onupdate=datetime.utcnow)
@@ -96,3 +108,6 @@ class Item(db.Model):
         if include_category:
             serialized_item['category'] = self.category.serialize(False)
         return serialized_item
+
+    def has_perm(self, user, perm_type='read'):
+        return self.created_by == user if perm_type != 'read' else True
