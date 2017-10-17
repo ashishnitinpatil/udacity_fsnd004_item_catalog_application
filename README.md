@@ -39,11 +39,7 @@ Usage
     ```
 - Initialize db
     ```bash
-    flask shell
-    ```
-    ```python
-    >>> from item_catalog_app.models import db
-    >>> db.create_all()
+    flask db upgrade
     ```
 - Create your own secrets.json, refer to [sample_secrets.json](/sample_secrets.json) for example
 - Run server

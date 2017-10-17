@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 from flask import Flask
+from flask_migrate import Migrate
 from item_catalog_app.settings import Config
 from item_catalog_app.models import db, login_manager
 from item_catalog_app.views.users import routes as user_routes
@@ -21,6 +22,7 @@ def initialize_apps(app):
     login_manager.init_app(app)
     login_manager.login_view = 'users.login'
     db.init_app(app)
+    Migrate(app, db)
 
 
 def register_blueprints(app):
