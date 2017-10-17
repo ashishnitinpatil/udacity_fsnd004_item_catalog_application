@@ -22,7 +22,7 @@ def initialize_apps(app):
     login_manager.init_app(app)
     login_manager.login_view = 'users.login'
     db.init_app(app)
-    Migrate(app, db)
+    Migrate(app, db, render_as_batch=True)
 
 
 def register_blueprints(app):
