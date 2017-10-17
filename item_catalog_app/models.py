@@ -110,4 +110,5 @@ class Item(db.Model):
         return serialized_item
 
     def has_perm(self, user, perm_type='read'):
+        # Category creater can delete child item, even if he hasn't created it
         return self.created_by == user if perm_type != 'read' else True

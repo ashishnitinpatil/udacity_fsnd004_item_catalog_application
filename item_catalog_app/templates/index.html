@@ -14,10 +14,12 @@
             {% for category in categories %}
                 <li class="list-group-item clearfix">
                     <a href="{{ url_for('catalog.category_display', category_id=category.id) }}">{{ category.name }}</a>
+                    {% if current_user == category.created_by %}
                     <span class="float-right">
                         <a href="{{ url_for('catalog.edit_category', category_id=category.id) }}" class="btn btn-xs btn-outline-info"><i class="material-icons">mode_edit</i></a>
                         <a href="{{ url_for('catalog.delete_category', category_id=category.id) }}" class="btn btn-xs btn-outline-danger"><i class="material-icons">delete</i></a>
                     </span>
+                    {% endif %}
                 </li>
             {% endfor %}
             {% endif %}
@@ -37,10 +39,12 @@
             {% for item in latest_items %}
                 <li class="list-group-item clearfix">
                     <a href="{{ url_for('catalog.item_display', item_id=item.id) }}">{{ item.name }}</a>
+                    {% if current_user == item.created_by %}
                     <span class="float-right">
                         <a href="{{ url_for('catalog.edit_item', item_id=item.id) }}" class="btn btn-xs btn-outline-info"><i class="material-icons">mode_edit</i></a>
                         <a href="{{ url_for('catalog.delete_item', item_id=item.id) }}" class="btn btn-xs btn-outline-danger"><i class="material-icons">delete</i></a>
                     </span>
+                    {% endif %}
                 </li>
             {% endfor %}
             {% endif %}

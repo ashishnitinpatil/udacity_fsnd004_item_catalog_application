@@ -29,7 +29,8 @@ def index():
 @login_required
 def new_category():
     if request.method == 'POST':
-        category = Category(name=request.form['name'])
+        category = Category(name=request.form['name'],
+                            created_by=current_user)
         db.session.add(category)
         db.session.commit()
         flash('New Category %s Successfully Created' % category.name)
@@ -45,6 +46,10 @@ def edit_category(category_id):
     if not category:
         flash('Wrong category_id given, do you want to create one?')
         return redirect(url_for('catalog.new_category'))
+    if not category.has_perm(current_user, 'edit'):
+        flash('Sorry, but only the creater of the category can edit it!')
+        return redirect(url_for('catalog.category_display',
+                                category_id=category.id))
     if request.method == 'POST':
         if request.form['name']:
             category.name = request.form['name']
@@ -82,7 +87,8 @@ def new_item(category_id=None):
     if request.method == 'POST':
         item = Item(category_id=request.form['category'],
                     name=request.form['name'],
-                    description=request.form['description'])
+                    description=request.form['description'],
+                    created_by=current_user)
         db.session.add(item)
         db.session.commit()
         flash('New Item %s Successfully Created' % item.name)
@@ -99,6 +105,9 @@ def edit_item(item_id):
     if not item:
         flash('Wrong item_id given, do you want to create one?')
         return redirect(url_for('catalog.new_item'))
+    if not item.has_perm(current_user, 'edit'):
+        flash('Sorry, but only the creater of the item can edit it!')
+        return redirect(url_for('catalog.item_display', item_id=item.id))
     if request.method == 'POST':
         item.name = request.form['name']
         item.category_id = request.form['category']
@@ -127,6 +136,9 @@ def item_json(item_id):
 def delete_object(Model, object_id):
     """Helper function to handle object deletion given it's type & id"""
     object = get_or_abort(Model, object_id)
+    if not object.has_perm(current_user, 'edit'):
+        flash('Sorry, but you can only delete objects that you have created!')
+        return redirect(url_for('catalog.index'))
     if request.method == 'POST':
         db.session.delete(object)
         db.session.commit()

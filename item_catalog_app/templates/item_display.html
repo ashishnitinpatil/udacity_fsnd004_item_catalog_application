@@ -5,10 +5,12 @@
         <div class="card border-default">
             <div class="card-header">
                 <span class="card-title h4">{{ item.name }}</span>
+                {% if current_user == item.created_by %}
                 <span class="float-right">
                     <a href="{{ url_for('catalog.edit_item', item_id=item.id) }}" class="btn btn-xs btn-outline-info"><i class="material-icons">mode_edit</i></a>
                     <a href="{{ url_for('catalog.delete_item', item_id=item.id) }}" class="btn btn-xs btn-outline-danger"><i class="material-icons">delete</i></a>
                 </span>
+                {% endif %}
             </div>
             <div class="card-body clearfix">
                 <p class="card-text">
